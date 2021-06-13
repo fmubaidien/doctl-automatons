@@ -14,7 +14,7 @@ clean.pop(-1) #an extra unnecessary row is added at the end so this is to get ri
 count=0
 for row in clean:
     if row[-1]=="":
-        if row[1].includes("pvc"):
+        if row[1].includes("pvc"): #Check if the volume is a kuberenetes volume
             sp.run(["doctl", "compute", "volume", "delete", row[0]], capture_output=True, text=True, input="y")
             count+=1
         else:
