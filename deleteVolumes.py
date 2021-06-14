@@ -10,11 +10,19 @@ for row in data:
     clean.append(row.split("   ")) #split based on 3 spaces since the tab is 3 spaces
 clean.pop(-1) #an extra unnecessary row is added at the end so this is to get rid of it
 
+#print(clean[0][-1])
 
+
+# for row in clean:
+#     print(row)
+#     for col in row:
+#         col = col.replace(" ","")
+
+# print(clean[0][-1])
 count=0
 for row in clean:
-    if row[-1]=="":
-        print(row[1])
+    if row[-1]==" ":
+        print(row)
         if "pvc" in row[1]: #Check if the volume is a kuberenetes volume
             print("deleting", row[1])
             sp.run(["doctl", "compute", "volume", "delete", row[0]], capture_output=True, text=True, input="y")
@@ -27,5 +35,3 @@ for row in clean:
                 count+=1
 
 print(count, "Volumes have been deleted successfully")
-
-
